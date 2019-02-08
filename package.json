@@ -2,7 +2,8 @@
   "name": "Retest-525",
   "version": "1.0.0",
   "dependencies": {
-    "slappforge-sdk-aws": "0.0.5"
+    "slappforge-sdk-aws": "0.0.5",
+    "googleapis": "29.0.0"
   },
   "devDependencies": {
     "aws-sdk": "2.176.0"

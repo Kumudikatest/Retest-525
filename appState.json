@@ -9,7 +9,8 @@
         "isDirectory": true,
         "children": [
           "8c99b139-4fc3-4a16-8854-bb19f7977274",
-          "ff4cf730-a051-4e36-b5df-0fdc0624f30b"
+          "ff4cf730-a051-4e36-b5df-0fdc0624f30b",
+          "9d5e4f2f-992b-4e3c-8e15-43f2529f2bb6"
         ],
         "isRemovable": false,
         "filePath": "Retest-525"
@@ -23,7 +24,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "Retest-525/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst cognito_idp = new AWS.CognitoIdentityServiceProvider();\nconst sns = new AWS.SNS();\n\nexports.handler = function (event, context, callback) {\n    sns.listSubscriptionsByTopic({\n        TopicArn: 'arn:aws:sns:us-east-1:318300609668:dynamodb'\n    }).promise()\n        .then(data => {\n            // your code goes here\n        })\n        .catch(err => {\n            // error handling goes here\n        });\n    cognito_idp.listUsers({\n        UserPoolId: \"us-east-1_D10y3fy0o\",\n        Limit: \"10\"\n    }, function (error, data) {\n        if (error) {\n            // implement error handling logic here\n            throw error;\n        }\n        // your logic goes within this block\n    });\n\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
+        "code": "let AWS = require('aws-sdk');\nlet google = require('googleapis').google;\nlet _auth = require('./Authorizer');\nconst datastore = google.datastore('v1');\nconst cognito_idp = new AWS.CognitoIdentityServiceProvider();\nconst sns = new AWS.SNS();\n\nexports.handler = function (event, context, callback) {\n    sns.listSubscriptionsByTopic({\n        TopicArn: 'arn:aws:sns:us-east-1:318300609668:dynamodb'\n    }).promise()\n        .then(data => {\n            // your code goes here\n        })\n        .catch(err => {\n            // error handling goes here\n        });\n    cognito_idp.listUsers({\n        UserPoolId: \"us-east-1_D10y3fy0o\",\n        Limit: \"10\"\n    }, function (error, data) {\n        if (error) {\n            // implement error handling logic here\n            throw error;\n        }\n        // your logic goes within this block\n    });\n    datastore.projects.beginTransaction({\n        projectId: process.env.GCP_PROJECT,\n        resource: {\n            transactionOptions: {\n                readWrite: {}\n            }\n        }\n    }).then(response => {\n        console.log(response.data);           // successful response\n        /*\n        response.data = {\n            \"transaction\": \"<transaction ID>\"\n        }\n        */\n    })\n        .catch(err => {\n            console.log(err, err.stack); // an error occurred\n        });\n\n\n    callback(null, { \"message\": \"Successfully executed\" });\n}",
         "triggers": [],
         "config": {
           "runtime": "nodejs8.10",
@@ -51,6 +52,18 @@
         "isRemovable": true,
         "filePath": "Retest-525/ConnectionManager.js",
         "code": "module.exports = function() {\n    this.dbConnections = [];\n\n    this.dbConnections[\"authdatabase\"] = {\n        host: \"authdatabase.czndmdv7dw6d.us-east-1.rds.amazonaws.com\",\n        port: \"3306\",\n        user: \"rdsuser\",\n        password: process.env.Password_rdsAuthdatabase,\n        database: \"authDatabase\"\n    };\n};",
+        "triggers": []
+      },
+      "9d5e4f2f-992b-4e3c-8e15-43f2529f2bb6": {
+        "id": "9d5e4f2f-992b-4e3c-8e15-43f2529f2bb6",
+        "parent": "4bd90596-63db-44f5-9daa-6e28065ada5c",
+        "name": "Authorizer.js",
+        "type": "JS_FILE",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "Retest-525/Authorizer.js",
+        "code": "const google = require(\"googleapis\").google;\n\nconst key = JSON.parse(process.env.GCP_SERVICE_ACCOUNT_KEY);\nconst jwtClient = new google.auth.JWT({\n    email: key.client_email,\n    key: key.private_key,\n    scopes: [\"https://www.googleapis.com/auth/cloud-platform\"]\n});\n\ngoogle.options({auth: jwtClient, project: process.env.GCP_PROJECT});",
         "triggers": []
       }
     },
@@ -398,6 +411,12 @@
           "subscriptions": []
         },
         "globallyEditable": true
+      },
+      "datastore": {
+        "name": "datastore",
+        "type": "datastore",
+        "config": {},
+        "globallyEditable": false
       }
     },
     "customTemplate": {
@@ -408,6 +427,22 @@
       {
         "lambdaId": "all",
         "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      },
+      {
+        "lambdaId": "all",
+        "varKey": "GCP_SERVICE_ACCOUNT_KEY",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      },
+      {
+        "lambdaId": "all",
+        "varKey": "GCP_PROJECT",
         "varValue": null,
         "shouldPersist": false,
         "displayOnly": false,
@@ -427,6 +462,12 @@
           "version": "2.176.0",
           "dev": true,
           "notRemovable": false
+        },
+        "googleapis": {
+          "name": "googleapis",
+          "version": "29.0.0",
+          "dev": false,
+          "notRemovable": false
         }
       }
     }
@@ -438,7 +479,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1549623526950
+    "lastSave": 1549623895008
   },
   "VCS_STATE": {
     "provider": "GitHub",
