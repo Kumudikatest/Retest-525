@@ -1,21 +1,21 @@
 {
   "EDITOR_STATE": {
     "allProjectFiles": {
-      "9d17d151-2c92-4368-8f82-5e08d04d1249": {
-        "id": "9d17d151-2c92-4368-8f82-5e08d04d1249",
+      "4d894871-bb79-4a0c-a4e2-86669eeb3453": {
+        "id": "4d894871-bb79-4a0c-a4e2-86669eeb3453",
         "parent": null,
         "name": "Retest-525",
         "type": "DIRECTORY",
         "isDirectory": true,
         "children": [
-          "4d58bcb7-c649-4be8-b73a-c396c79bcf4b"
+          "75b03795-9c90-4901-a206-c9de4744e71f"
         ],
         "isRemovable": false,
         "filePath": "Retest-525"
       },
-      "4d58bcb7-c649-4be8-b73a-c396c79bcf4b": {
-        "id": "4d58bcb7-c649-4be8-b73a-c396c79bcf4b",
-        "parent": "9d17d151-2c92-4368-8f82-5e08d04d1249",
+      "75b03795-9c90-4901-a206-c9de4744e71f": {
+        "id": "75b03795-9c90-4901-a206-c9de4744e71f",
+        "parent": "4d894871-bb79-4a0c-a4e2-86669eeb3453",
         "name": "lambda.js",
         "type": "LAMBDA_FILE",
         "isDirectory": false,
@@ -23,64 +23,23 @@
         "isRemovable": true,
         "filePath": "Retest-525/lambda.js",
         "code": "exports.handler = function(event, context, callback) {\n    \n    callback(null, {\"message\": \"Successfully executed\"});\n}",
-        "triggers": [
-          {
-            "resourceName": "apigusEast2TestGitany",
-            "config": {}
-          }
-        ],
+        "triggers": [],
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
           "timeout": 60,
           "memory": 128,
           "layers": []
-        },
-        "testCases": {
-          "f5e720b9-6347-411f-bed3-d1a633b7d39b": {
-            "id": "f5e720b9-6347-411f-bed3-d1a633b7d39b",
-            "name": "Unnamed event",
-            "functionId": "4d58bcb7-c649-4be8-b73a-c396c79bcf4b",
-            "event": "{\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n}"
-          }
         }
       }
     },
     "deletedFiles": [],
-    "rootNode": "9d17d151-2c92-4368-8f82-5e08d04d1249",
+    "rootNode": "4d894871-bb79-4a0c-a4e2-86669eeb3453",
     "openFiles": [
-      "4d58bcb7-c649-4be8-b73a-c396c79bcf4b"
+      "75b03795-9c90-4901-a206-c9de4744e71f"
     ],
-    "currentFileId": "4d58bcb7-c649-4be8-b73a-c396c79bcf4b",
-    "resources": {
-      "apigusEast2TestGitany": {
-        "name": "apigusEast2TestGitany",
-        "type": "API_GATEWAY",
-        "config": {
-          "selectedRegion": "us-east-2",
-          "apiMode": 1,
-          "apiName": "TestGit",
-          "apiId": "o04f0h75zg",
-          "endpointType": "EDGE",
-          "rootResourceId": "1ukwyq79f7",
-          "existingResources": {
-            "/": "1ukwyq79f7",
-            "/test1": "i77wu0"
-          },
-          "resourceMode": 1,
-          "resourcePath": "/",
-          "resourceName": "",
-          "resourceId": "1ukwyq79f7",
-          "restMethod": "ANY",
-          "proxyIntegration": false,
-          "enableCORS": false,
-          "stageMode": 1,
-          "stageName": "test1",
-          "stageDeploymentId": "x243sd"
-        },
-        "globallyEditable": false
-      }
-    },
+    "currentFileId": "75b03795-9c90-4901-a206-c9de4744e71f",
+    "resources": {},
     "customTemplate": {
       "dialect": null,
       "definitions": {}
@@ -103,10 +62,10 @@
     "projectName": "Retest-525",
     "projectDescription": "",
     "projectVersion": "1.0.0",
-    "projectRegion": "us-east-2",
+    "projectRegion": "eu-west-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1549617173020
+    "lastSave": 1549618596929
   },
   "VCS_STATE": {
     "provider": "GitHub",
