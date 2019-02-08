@@ -23,13 +23,26 @@
         "isRemovable": true,
         "filePath": "Retest-525/lambda.js",
         "code": "exports.handler = function(event, context, callback) {\n    \n    callback(null, {\"message\": \"Successfully executed\"});\n}",
-        "triggers": [],
+        "triggers": [
+          {
+            "resourceName": "apigusEast2TestGitany",
+            "config": {}
+          }
+        ],
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
           "timeout": 60,
           "memory": 128,
           "layers": []
+        },
+        "testCases": {
+          "f5e720b9-6347-411f-bed3-d1a633b7d39b": {
+            "id": "f5e720b9-6347-411f-bed3-d1a633b7d39b",
+            "name": "Unnamed event",
+            "functionId": "4d58bcb7-c649-4be8-b73a-c396c79bcf4b",
+            "event": "{\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n}"
+          }
         }
       }
     },
@@ -39,7 +52,35 @@
       "4d58bcb7-c649-4be8-b73a-c396c79bcf4b"
     ],
     "currentFileId": "4d58bcb7-c649-4be8-b73a-c396c79bcf4b",
-    "resources": {},
+    "resources": {
+      "apigusEast2TestGitany": {
+        "name": "apigusEast2TestGitany",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-2",
+          "apiMode": 1,
+          "apiName": "TestGit",
+          "apiId": "o04f0h75zg",
+          "endpointType": "EDGE",
+          "rootResourceId": "1ukwyq79f7",
+          "existingResources": {
+            "/": "1ukwyq79f7",
+            "/test1": "i77wu0"
+          },
+          "resourceMode": 1,
+          "resourcePath": "/",
+          "resourceName": "",
+          "resourceId": "1ukwyq79f7",
+          "restMethod": "ANY",
+          "proxyIntegration": false,
+          "enableCORS": false,
+          "stageMode": 1,
+          "stageName": "test1",
+          "stageDeploymentId": "x243sd"
+        },
+        "globallyEditable": false
+      }
+    },
     "customTemplate": {
       "dialect": null,
       "definitions": {}
@@ -65,7 +106,7 @@
     "projectRegion": "us-east-2",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1549617011992
+    "lastSave": 1549617173020
   },
   "VCS_STATE": {
     "provider": "GitHub",
